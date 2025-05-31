@@ -1,72 +1,76 @@
 [build-system]
-requires = ["hatchling""]
+requires = ["hatchling"]
 build-backend = "hatchling.build"
 
 [project]
-name = "genicam_simulator"
-description = "Modern, extensible Python project management"
+name = "camera_simulator"
+description = "Camera simulator"
 readme = "README.md"
 license = "MIT"
-requires-python = ">=3.8"
+requires-python = ">=3.10,~=3.14.3"
 keywords = [
-  "build",
-  "dependency",
-  "environment",
-  "hatch",
-  "packaging",
-  "plugin",
-  "publishing",
-  "release",
-  "versioning",
 ]
 authors = [
-  { name = "Ofek Lev", email = "oss@ofek.dev" },
+  { name = "bobejo"},
 ]
 classifiers = [
   "Intended Audience :: Developers",
   "License :: OSI Approved :: MIT License",
   "Natural Language :: English",
   "Operating System :: OS Independent",
-  "Programming Language :: Python :: 3.8",
-  "Programming Language :: Python :: 3.9",
   "Programming Language :: Python :: 3.10",
   "Programming Language :: Python :: 3.11",
   "Programming Language :: Python :: 3.12",
   "Programming Language :: Python :: 3.13",
+  "Programming Language :: Python :: 3.14",
 ]
 dependencies = [
+    "pydantic",
+    "pyyaml",
 ]
 dynamic = ["version"]
 
 [project.urls]
-Homepage = "https://github.com/bobejo/genicam_simulator"
+Homepage = "https://github.com/bobejo/camera_simulator"
 
 [project.scripts]
-genicam_simulator = "genicam_simulator.cli:main"
+camera_simulator = "camera_simulator.cli:main"
 
 [tool.hatch.version]
-source = "vcs"
+path = "src/camera_simulator/version.py"
+pattern = 'VERSION = "(?P<version>[^"]+)"'
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/camera_simulator"]
 
 
-[tool.hatch.build.hooks.vcs]
-version-file = "src/hatch/version.py"
-
-[tool.hatch.build.targets.sdist]
-exclude = []
+[tool.hatch.envs.default]
+skip-install = true
+dependencies = [
+    "pydantic",
+    "pyyaml",
+]
+path = ".venv"
 
 [tool.hatch.envs.hatch-test]
 default-args = ["tests"]
+dependencies = [
+  "pytest",
+  "pytest-cov",
+  "harvesters~=1.4",
+  "genicam~=1.5"
+]
+
+[[tool.hatch.envs.hatch-test.matrix]]
+python = ["3.10", "3.11", "3.12", "3.13", "3.14"]
 
 [tool.hatch.envs.hatch-static-analysis]
 config-path = "none"
 
-[tool.mypy]
-disallow_untyped_defs = false
-disallow_incomplete_defs = false
-enable_error_code = ["ignore-without-code", "truthy-bool"]
-follow_imports = "normal"
-ignore_missing_imports = true
-pretty = true
-show_column_numbers = true
-warn_no_return = false
-warn_unused_ignores = true
+[tool.hatch.envs.types]
+dependencies = [
+  "ty",
+]
+
+[tool.hatch.envs.types.scripts]
+check = "ty check src"

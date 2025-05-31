@@ -1,0 +1,614 @@
+---
+RegisterDescription:
+  xmlns: http://www.genicam.org/GenApi/Version_1_0
+  xmlns:xsi: http://www.w3.org/2001/XMLSchema-instance
+  ModelName: fake_camera
+  VendorName: singemar
+  StandardNameSpace: None
+  SchemaMajorVersion: 1
+  SchemaMinorVersion: 0
+  SchemaSubMinorVersion: 1
+  MajorVersion: 1
+  MinorVersion: 0
+  SubMinorVersion: 0
+  ToolTip: Fake camera
+  Manufacturer_specific_information: empty
+  UserDefinedName: fake_camera
+  ProductGuid: 0
+  VersionGuid: 0
+  xsi:schemaLocation: http://www.genicam.org/GenApi/Version_1_0 GenApiSchema.xsd
+  Category:
+  -
+    Name: Root
+    NameSpace: Standard
+    pFeature:
+    - DeviceControl
+    - ImageFormatControl
+    - AcquisitionControl
+    - TransportLayerControl
+    - Debug
+  -
+    Name: DeviceControl
+    NameSpace: Standard
+    pFeature:
+    - DeviceVendorName
+    - DeviceModelName
+    - DeviceManufacturerInfo
+    - DeviceID
+    - DeviceVersion
+  -
+    Name: ImageFormatControl
+    NameSpace: Standard
+    pFeature:
+    - SensorHeight
+    - SensorWidth
+    - OffsetX
+    - OffsetY
+    - Width
+    - Height
+    - BinningHorizontal
+    - BinningVertical
+    - PixelFormat
+  -
+    Name: AcquisitionControl
+    NameSpace: Custom
+    pFeature:
+    - AcquisitionMode
+    - AcquisitionStart
+    - AcquisitionStop
+    - TriggerSelector
+    - TriggerMode
+    - TriggerSoftware
+    - TriggerSource
+    - TriggerActivation
+    - ExposureTimeAbs
+  -
+    Name: AnalogControl
+    NameSpace: Custom
+    pFeature:
+    - GainRaw
+    - GainAuto
+  -
+    Name: TransportLayerControl
+    NameSpace: Standard
+    pFeature: PayloadSize
+  -
+    Name: Debug
+    NameSpace: Standard
+    pFeature: TestRegister
+  StringReg:
+  -
+    Name: DeviceVendorName
+    NameSpace: Standard
+    DisplayName: Vendor Name
+    Address: 0x48
+    Length: 32
+    AccessMode: RO
+    pPort: Device
+  -
+    Name: DeviceModelName
+    NameSpace: Standard
+    DisplayName: Model Name
+    Address: 0x68
+    Length: 32
+    AccessMode: RO
+    pPort: Device
+  -
+    Name: DeviceManufacturerInfo
+    NameSpace: Standard
+    DisplayName: Manufacturer Info
+    Address: 0xa8
+    Length: 48
+    AccessMode: RO
+    pPort: Device
+  -
+    Name: DeviceID
+    NameSpace: Standard
+    DisplayName: Device ID
+    Address: 0xd8
+    Length: 16
+    AccessMode: RO
+    pPort: Device
+  -
+    Name: DeviceVersion
+    NameSpace: Standard
+    DisplayName: Device Version
+    Address: 0x88
+    Length: 32
+    AccessMode: RO
+    pPort: Device
+  -
+    Name: TestStringReg
+    NameSpace: Custom
+    Address: 0x200
+    Length: 32
+    AccessMode: RW
+    pPort: Device
+  Integer:
+  -
+    Name: SensorHeight
+    NameSpace: Standard
+    Description: Full height of image sensor.
+    pValue: SensorHeightRegister
+  -
+    Name: SensorWidth
+    NameSpace: Standard
+    Description: Full height of image sensor.
+    pValue: SensorWidthRegister
+  -
+    Name: OffsetX
+    NameSpace: Standard
+    Description: X offset of image, in pixels.
+    pValue: OffsetXRegister
+    Min: 0
+    pMax: SensorWidth
+    Inc: 1
+  -
+    Name: OffsetY
+    NameSpace: Standard
+    Description: Y offset of image, in pixels.
+    pValue: OffsetYRegister
+    Min: 0
+    pMax: SensorHeight
+    Inc: 1
+  -
+    Name: Width
+    NameSpace: Standard
+    Description: Width of image, in pixels.
+    pValue: WidthRegister
+    Min: 1
+    pMax: SensorWidth
+    Inc: 1
+  -
+    Name: Height
+    NameSpace: Standard
+    Description: Height of image, in pixels.
+    pValue: HeightRegister
+    Min: 1
+    pMax: SensorHeight
+    Inc: 1
+  -
+    Name: BinningHorizontal
+    NameSpace: Standard
+    Description: Binning in horizontal direction.
+    pValue: BinningHorizontalRegister
+    Min: 1
+    Max: 16
+  -
+    Name: BinningVertical
+    NameSpace: Standard
+    Description: Binning in vertical direction.
+    pValue: BinningVerticalRegister
+    Min: 1
+    Max: 16
+  -
+    Name: AcquisitionFramePeriod
+    NameSpace: Custom
+    pValue: AcquisitionFramePeriodRegister
+    Min: 1000
+    Max: 10000000
+  -
+    Name: TriggerSelectorInteger
+    NameSpace: Custom
+    Value: 0
+  -
+    Name: GainRaw
+    NameSpace: Standard
+    Description: Raw gain.
+    pValue: GainRawRegister
+    Min: 0
+    Max: 10
+  -
+    Name: TLParamsLocked
+    ToolTip:  Indicates whether a live grab is under way
+    Visibility: Invisible
+    Value: 0
+    Min: 0
+    Max: 1
+  IntReg:
+  -
+    Name: SensorHeightRegister
+    NameSpace: Custom
+    Address: 0x118
+    Length: 4
+    AccessMode: RO
+    pPort: Device
+    Sign: Unsigned
+    Endianess: BigEndian
+  -
+    Name: SensorWidthRegister
+    NameSpace: Custom
+    Address: 0x11c
+    Length: 4
+    AccessMode: RO
+    pPort: Device
+    Sign: Unsigned
+    Endianess: BigEndian
+  -
+    Name: OffsetXRegister
+    NameSpace: Custom
+    Address: 0x130
+    Length: 4
+    AccessMode: RW
+    pPort: Device
+    Sign: Unsigned
+    Endianess: BigEndian
+  -
+    Name: OffsetYRegister
+    NameSpace: Custom
+    Address: 0x134
+    Length: 4
+    AccessMode: RW
+    pPort: Device
+    Sign: Unsigned
+    Endianess: BigEndian
+  -
+    Name: WidthRegister
+    NameSpace: Custom
+    Address: 0x100
+    Length: 4
+    AccessMode: RW
+    pPort: Device
+    Sign: Unsigned
+    Endianess: BigEndian
+  -
+    Name: HeightRegister
+    NameSpace: Custom
+    Address: 0x104
+    Length: 4
+    AccessMode: RW
+    pPort: Device
+    Sign: Unsigned
+    Endianess: BigEndian
+  -
+    Name: BinningHorizontalRegister
+    NameSpace: Custom
+    Address: 0x108
+    Length: 4
+    AccessMode: RW
+    pPort: Device
+    Sign: Unsigned
+    Endianess: BigEndian
+  -
+    Name: BinningVerticalRegister
+    NameSpace: Custom
+    Address: 0x10c
+    Length: 4
+    AccessMode: RW
+    pPort: Device
+    Sign: Unsigned
+    Endianess: BigEndian
+  -
+    Name: PixelFormatRegister
+    NameSpace: Custom
+    Address: 0x128
+    Length: 4
+    AccessMode: RW
+    pPort: Device
+    Sign: Unsigned
+    Endianess: BigEndian
+  -
+    Name: AcquisitionCommandRegister
+    NameSpace: Custom
+    Address: 0x124
+    Length: 4
+    AccessMode: WO
+    pPort: Device
+    Sign: Unsigned
+    Endianess: BigEndian
+  -
+    Name: AcquisitionModeRegister
+    NameSpace: Custom
+    Address: 0x12c
+    Length: 4
+    AccessMode: RW
+    pPort: Device
+    Sign: Unsigned
+    Endianess: BigEndian
+  -
+    Name: AcquisitionFramePeriodRegister
+    NameSpace: Custom
+    Address: 0x138
+    Length: 4
+    AccessMode: RW
+    pPort: Device
+    Sign: Unsigned
+    Endianess: BigEndian
+  -
+    Name: TriggerModeRegister
+    NameSpace: Custom
+    Address: 0x300
+    pIndex:
+      "-Offset": 0x20
+      "#text": TriggerSelectorInteger
+    Length: 4
+    AccessMode: RW
+    pPort: Device
+    Sign: Unsigned
+    Endianess: BigEndian
+  -
+    Name: TriggerSourceRegister
+    NameSpace: Custom
+    Address: 0x304
+    pIndex:
+      "-Offset": 0x20
+      "#text": TriggerSelectorInteger
+    Length: 4
+    AccessMode: RW
+    pPort: Device
+    Sign: Unsigned
+    Endianess: BigEndian
+  -
+    Name: TriggerActivationRegister
+    NameSpace: Custom
+    Address: 0x308
+    pIndex:
+      "-Offset": 0x20
+      "#text": TriggerSelectorInteger
+    Length: 4
+    AccessMode: RW
+    pPort: Device
+    Sign: Unsigned
+    Endianess: BigEndian
+  -
+    Name: TriggerSoftwareCommandRegister
+    NameSpace: Custom
+    Address: 0x30c
+    Length: 4
+    AccessMode: WO
+    pPort: Device
+    Sign: Unsigned
+    Endianess: BigEndian
+  -
+    Name: ExposureTimeAbsRegister
+    NameSpace: Custom
+    Address: 0x120
+    Length: 4
+    AccessMode: RW
+    pPort: Device
+    Sign: Unsigned
+    Endianess: BigEndian
+  -
+    Name: GainRawRegister
+    NameSpace: Custom
+    Address: 0x110
+    Length: 4
+    AccessMode: RW
+    pPort: Device
+    Sign: Unsigned
+    Endianess: BigEndian
+  -
+    Name: GainAutoRegister
+    NameSpace: Custom
+    Address: 0x114
+    Length: 4
+    AccessMode: RW
+    pPort: Device
+    Sign: Unsigned
+    Endianess: BigEndian
+  -
+    Name: TestRegister
+    NameSpace: Custom
+    Address: 0x1f0
+    Length: 4
+    AccessMode: RW
+    pPort: Device
+    Sign: Unsigned
+    Endianess: BigEndian
+  Enumeration:
+  -
+    Name: PixelFormat
+    NameSpace: Standard
+    DisplayName: Pixel format
+    EnumEntry:
+    -
+      Name: BayerBG8
+      NameSpace: Standard
+      Value: 17301515
+    -
+      Name: BayerGB8
+      NameSpace: Standard
+      Value: 17301514
+    -
+      Name: BayerGR8
+      NameSpace: Standard
+      Value: 17301512
+    -
+      Name: BayerRG8
+      NameSpace: Standard
+      Value: 17301513
+    -
+      Name: Mono8
+      NameSpace: Standard
+      Value: 17301505
+    -
+      Name: RGB8
+      NameSpace: Standard
+      Value: 35127316
+    -
+      Name: Mono16
+      NameSpace: Standard
+      Value: 17825799
+    pValue: PixelFormatRegister
+  -
+    Name: AcquisitionMode
+    NameSpace: Standard
+    DisplayName: Acquisition mode
+    EnumEntry:
+    -
+      Name: Continuous
+      NameSpace: Standard
+      Value: 1
+    -
+      Name: SingleFrame
+      NameSpace: Standard
+      Value: 2
+    -
+      Name: MultiFrame
+      NameSpace: Standard
+      Value: 3
+    pValue: AcquisitionModeRegister
+  -
+    Name: TriggerSelector
+    NameSpace: Standard
+    EnumEntry:
+    -
+      Name: FrameStart
+      NameSpace: Standard
+      Value: 0
+    -
+      Name: AcquisitionStart
+      NameSpace: Standard
+      Value: 1
+    pValue: TriggerSelectorInteger
+  -
+    Name: TriggerMode
+    NameSpace: Standard
+    DisplayName: Trigger mode
+    EnumEntry:
+    -
+      Name: Off
+      NameSpace: Standard
+      Value: 0
+    -
+      Name: On
+      NameSpace: Standard
+      Value: 1
+    pValue: TriggerModeRegister
+  -
+    Name: TriggerSource
+    NameSpace: Standard
+    DisplayName: Trigger source
+    EnumEntry:
+    -
+      Name: Line0
+      NameSpace: Standard
+      Value: 0
+    -
+      Name: Software
+      NameSpace: Standard
+      Value: 1
+    pValue: TriggerSourceRegister
+  -
+    Name: TriggerActivation
+    NameSpace: Standard
+    DisplayName: Trigger activation
+    EnumEntry:
+      Name: RisingEdge
+      NameSpace: Standard
+      Value: 0
+    pValue: TriggerActivationRegister
+  -
+    Name: GainAuto
+    NameSpace: Standard
+    Description: Automatic gain mode.
+    EnumEntry:
+    -
+      Name: Off
+      NameSpace: Standard
+      Value: 1
+    -
+      Name: Once
+      NameSpace: Standard
+      Value: 3
+    -
+      Name: Continuous
+      NameSpace: Standard
+      Value: 2
+    pValue: GainAutoRegister
+  Command:
+  -
+    Name: AcquisitionStart
+    NameSpace: Standard
+    Description: Start acquisition.
+    pValue: AcquisitionCommandRegister
+    CommandValue: 1
+  -
+    Name: AcquisitionStop
+    NameSpace: Standard
+    Description: Stop acquisition.
+    pValue: AcquisitionCommandRegister
+    CommandValue: 0
+  -
+    Name: TriggerSoftware
+    NameSpace: Standard
+    Description: Generates an internal trigger. TriggerSource must be set to Software.
+    pValue: TriggerSoftwareCommandRegister
+    CommandValue: 1
+  Float:
+  -
+    Name: AcquisitionFrameRate
+    pValue: AcquisitionFrameRateConverter
+  -
+    Name: ExposureTimeAbs
+    NameSpace: Standard
+    Description: Exposure duration, in microseconds.
+    pValue: ExposureTimeAbsConverter
+    Min: 10.0
+    Max: 10000000.0
+  Converter:
+  -
+    Name: AcquisitionFrameRateConverter
+    Description: Frame rate, in frames per second.
+    FormulaTo: (1000000 / FROM)
+    FormulaFrom: (1000000 / TO)
+    pValue: AcquisitionFramePeriod
+  -
+    Name: ExposureTimeAbsConverter
+    NameSpace: Custom
+    FormulaTo: FROM
+    FormulaFrom: TO
+    pValue: ExposureTimeAbsRegister
+  IntSwissKnife:
+    Name: PayloadSize
+    NameSpace: Standard
+    pVariable:
+    -
+      Name: WIDTH
+      "#text": Width
+    -
+      Name: HEIGHT
+      "#text": Height
+    -
+      Name: PIXELFORMAT
+      "#text": PixelFormat
+    Formula: WIDTH * HEIGHT * ((PIXELFORMAT>>16)&0xFF) / 8
+  Boolean:
+    Name: TestBoolean
+    NameSpace: Custom
+    pValue: TestRegister
+    OnValue: 321
+    OffValue: 123
+  StructReg:
+    "-Comment": TestStructReg
+    Address: 0x1f0
+    Length: 4
+    AccessMode: RW
+    pPort: Device
+    Endianess: BigEndian
+    StructEntry:
+    -
+      Name: StructEntry_16_31
+      NameSpace: Custom
+      LSB: 31
+      MSB: 16
+      Sign: Signed
+    -
+      Name: StructEntry_0_15
+      NameSpace: Custom
+      LSB: 15
+      MSB: 0
+      Sign: Unsigned
+    -
+      Name: StructEntry_15
+      NameSpace: Custom
+      Bit: 15
+    -
+      Name: StructEntry_0_31
+      NameSpace: Custom
+      LSB: 31
+      MSB: 0
+      Sign: Unsigned
+  Port:
+    Name: Device
+    NameSpace: Standard
