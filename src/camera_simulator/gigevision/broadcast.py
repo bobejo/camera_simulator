@@ -19,7 +19,7 @@ class CameraBroadcaster(threading.Thread):
         threading.Thread.__init__(self)
         self.ip = ip
         self.register = register
-        self._stop = threading.Event()
+        self._stop_event = threading.Event()
 
     def run(self) -> None:
         with socket.socket(socket.AF_INET, socket.SOCK_DGRAM) as server_socket:
@@ -33,7 +33,7 @@ class CameraBroadcaster(threading.Thread):
             server_socket.settimeout(3)
 
             logger.debug("Server is started")
-            while not self._stop.is_set():
+            while not self._stop_event.is_set():
                 try:
                     data, addr = server_socket.recvfrom(1024)
                     if not data:
@@ -74,4 +74,4 @@ class CameraBroadcaster(threading.Thread):
                     logger.debug("Received unexpected response format")
 
     def stop(self) -> None:
-        self._stop.set()
+        self._stop_event.set()
